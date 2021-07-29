@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Router, { useRouter } from 'next/router';
 
@@ -10,6 +10,9 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const Scheme = (props) => {
 
     const [form] = Form.useForm();
+    // const [person, setPerson] = useState({})
+    // const [ field, setField ] = useFields([]);
+
     const onFormLayoutChange = (e) => {
         // setComponentSize(size);
         // console.log(e)    
@@ -18,15 +21,45 @@ const Scheme = (props) => {
     const onFinish = values => {
         console.log('Received values of form:', values);
     };
-    const handleChange = () => {
+    const handleChange = (e, key) => {
+
+        // console.log(e)
+
+        let fields = form.getFieldValue(['fields'])
+        console.log(fields)
+
+        form.setFieldsValue({'fields':fields.slice() })
         // form.setFieldsValue({ sights: [] });
     };
+
+
+
+    const getRelation = (field, restField, name, fieldKey) => {
+        console.log(field)
+        // form.setFieldValue
+        // switch(field["type"]){
+        //     case "int":
+        //         console.log(11111)
+        //         return(
+        //         <Form.Item
+        //             {...restField}
+        //             fieldKey={[fieldKey, 'last']}
+        //             rules={[{ required: true, message: 'Missing last name' }]}
+        //         >
+        //             <Input placeholder="Last Name" />
+        //         </Form.Item>
+        //         )
+        //     default:
+        //          return (<></>)
+        // }
+    }
 
     return (
         <Card>
             <Form
                 // labelCol={{ span: 4 }}
                 // wrapperCol={{ span: 14 }}
+                form={form}
                 layout="horizontal"
                 // initialValues={{ size: "componentSize" }}
                 onValuesChange={onFormLayoutChange}
@@ -55,7 +88,7 @@ const Scheme = (props) => {
                         <Select.Option value="system">system</Select.Option>
                     </Select>
                 </Form.Item>
-                <Form.List name="fields">
+                <Form.List name="fields" >
                     {(fields, { add, remove }) => (
                         <>
                             {fields.map(({ key, name, fieldKey, ...restField }) => (
@@ -77,22 +110,27 @@ const Scheme = (props) => {
                                     </Form.Item>
                                     <Form.Item
                                         {...restField}
-                                        name={[name, 'sight']}
-                                        fieldKey={[fieldKey, 'sight']}
+                                        name={[name, 'type']}
+                                        fieldKey={[fieldKey, 'type']}
                                         rules={[{ required: true, message: 'Missing sight' }]}
                                         >
-                                        <Select style={{ width: 130 }} onChange={handleChange}>
-                                            <Select.Option value="user">user</Select.Option>
+                                        <Select style={{ width: 130 }} onChange={(e)=>handleChange(e, key)}>
+                                            <Select.Option value="int">int</Select.Option>
+                                            <Select.Option value="text">text</Select.Option>
                                         </Select>
                                     </Form.Item>
+                                    <Form.Item shouldUpdate={(prevValues, curValues) => prevValues.additional !== curValues.additional}>
                                     {
-                                        console.log(fields[key])
-
+                                        console.log(form.getFieldValue(['fields', name]))
                                     }
                                     {
-                                        console.log(name)
-
+                                       form.getFieldValue(['fields', name, "type"])
                                     }
+                                    {/* {
+                                        getRelation(form.getFieldValue(['fields', name]), restField, name, fieldKey)
+                                    } */}
+
+                                    </Form.Item>
                                     <MinusCircleOutlined onClick={() => remove(name)} />
                                 </Space>
                             ))}
