@@ -43,10 +43,10 @@ const Sidebar = () => {
 			<Menu.Item key="/" onClick={() => router.push('/')} icon={<DashboardOutlined />}>
 				<span>Dashboard</span>
 			</Menu.Item>
-			<Menu.Item key="/antd-demo" onClick={() => router.push('/antd-demo')} icon={<AntDesignOutlined />}>
-				<span>Antd Demo</span>
+			<Menu.Item key="/schemes" onClick={() => router.push('/schemes')} icon={<AntDesignOutlined />}>
+				<span>Scheme</span>
 			</Menu.Item>
-			<Menu.Item key="/users" onClick={() => router.push('/users')} icon={<UsergroupAddOutlined />}>
+			{/* <Menu.Item key="/users" onClick={() => router.push('/users')} icon={<UsergroupAddOutlined />}>
 				<span>Users</span>
 			</Menu.Item>
 			<Menu.Item key="/products" onClick={() => router.push('/products')} icon={<ApartmentOutlined />}>
@@ -54,7 +54,7 @@ const Sidebar = () => {
 			</Menu.Item>
 			<Menu.Item key="/components" onClick={() => router.push('/components')} icon={<DeploymentUnitOutlined />}>
 				<span>Components</span>
-			</Menu.Item>
+			</Menu.Item> */}
 		</Menu>
 	);
 };

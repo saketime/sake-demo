@@ -93,38 +93,44 @@ const MainLayout = (props) => {
 						paddingLeft: broken ? 0 : collapsed ? 50 : 200,
 					}}
 				>
-                <Header
-                    style={{
-                        left: broken ? 0 : collapsed ? 50 : 200,
-                    }}
-                >
-                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                        className: classes.trigger,
-                        onClick: handleToggle,
-                    })}
-                    {
-                        broken &&
-                        <Link href="/">
-                            <a>
-                                <div className={classes.logoCenter}>
-                                    <Image
-                                        src="/images/logo.png"
-                                        alt="Logo"
-                                        width={35}
-                                        height={35}
-                                    />
-                                    <span>Boilerplate</span>
-                                </div>
-                            </a>
-                        </Link>
-                    }
-                    {/* <div className={classes.headerRight}>
-                        <Notifications />
-                        <AvatarDropDown />
-                    </div> */}
-                </Header>
-
-
+					<Header
+						style={{
+							left: broken ? 0 : collapsed ? 50 : 200,
+						}}
+					>
+						{React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+							className: classes.trigger,
+							onClick: handleToggle,
+						})}
+						{
+							broken &&
+							<Link href="/">
+								<a>
+									<div className={classes.logoCenter}>
+										<Image
+											src="/images/logo.png"
+											alt="Logo"
+											width={35}
+											height={35}
+										/>
+										<span>Boilerplate</span>
+									</div>
+								</a>
+							</Link>
+						}
+						{/* <div className={classes.headerRight}>
+							<Notifications />
+							<AvatarDropDown />
+						</div> */}
+					</Header>
+					{mobiShow && broken && <div className={classes.overlay} onClick={() => setMobiShow(false)} />}
+					<Content
+							style={{
+								margin: 20,
+							}}
+						>
+						{children}
+					</Content>
                 </Layout>
             </Layout>
         </>
